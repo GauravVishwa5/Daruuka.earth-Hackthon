@@ -72,6 +72,9 @@ class ProfileUpdateRequest(BaseModel):
     species_richness: Optional[str] = None
     pollution_level: Optional[str] = None
     deforestation_pressure: Optional[str] = None
+    region: Optional[str] = None
+    latitude: Optional[float] = Field(None, ge=-90.0, le=90.0)
+    longitude: Optional[float] = Field(None, ge=-180.0, le=180.0)
 
 class AnalyzeRequest(BaseModel):
     soc_percent: float = Field(..., ge=0.0, le=20.0)
@@ -82,6 +85,9 @@ class AnalyzeRequest(BaseModel):
     species_richness: Optional[str] = None
     pollution_level: Optional[str] = None
     deforestation_pressure: Optional[str] = None
+    region: Optional[str] = "semi_arid"
+    latitude: Optional[float] = Field(None, ge=-90.0, le=90.0)
+    longitude: Optional[float] = Field(None, ge=-180.0, le=180.0)
 
 @app.get("/api/v1/health")
 def health_check():
@@ -153,7 +159,10 @@ def handle_chat(req: ChatRequest):
         soil_ph=float(updated_profile.get("soil_ph", 7.2)),
         species_richness=updated_profile.get("species_richness"),
         pollution_level=updated_profile.get("pollution_level"),
-        deforestation_pressure=updated_profile.get("deforestation_pressure")
+        deforestation_pressure=updated_profile.get("deforestation_pressure"),
+        region=str(updated_profile.get("region", "semi_arid")),
+        latitude=updated_profile.get("latitude"),
+        longitude=updated_profile.get("longitude")
     )
 
     # 1. Deterministic Multi-Metric Assessment
@@ -164,7 +173,7 @@ def handle_chat(req: ChatRequest):
 
     # 3. Scientific RAG Retrieval
     query_context = f"{telemetry.land_use} soil carbon {telemetry.soc_percent} rainfall {telemetry.annual_rainfall_mm}"
-    evidence_chunks = rag_service.retrieve_evidence(query_context, biome="semi_arid", limit=3)
+    evidence_chunks = rag_service.retrieve_evidence(query_context, biome=telemetry.region or "semi_arid", limit=3)
 
     # 4. Synthesize Dynamic Evidence Grounding & Draft Text
     top_rec = ranked_recs[0] if ranked_recs else None
@@ -177,21 +186,32 @@ def handle_chat(req: ChatRequest):
     horizon_info = ""
     if top_rec and top_rec.get("time_horizon"):
         th = top_rec["time_horizon"]
-        horizon_info = f"\n**Management Horizon:** {th.get('category', 'medium').capitalize()} term ({th.get('seasons', 1)} seasons). {th.get('note', '')}"
+        horizon_info = f"**Management Horizon:** {th.get('category', 'medium').capitalize()} term ({th.get('seasons', 1)} seasons). {th.get('note', '')}"
+
+    benefits_str = "N/A"
+    if top_rec and top_rec.get("primary_benefits"):
+        benefits_str = ", ".join([
+            f"{k.replace('_', ' ').capitalize()}: +{v}" if isinstance(v, (int, float)) else f"{k.replace('_', ' ').capitalize()}: {v}"
+            for k, v in top_rec["primary_benefits"].items()
+        ])
 
     draft_narrative = (
         f"**Environmental Assessment:** {assessment.summary_text}\n\n"
-        f"**Top Recommendation:** {rec_name} (Decision Score: {top_rec['decision_score'] if top_rec else 'N/A'}).\n\n"
-        f"**Scientific Evidence ({ev_source}):** {ev_excerpt}\n"
+        f"**Top Recommendation:** {rec_name} (Decision Score: {top_rec['decision_score'] if top_rec else 'N/A'})\n\n"
+        f"**Impacted Metrics:** {benefits_str}\n\n"
         f"{horizon_info}\n\n"
+        f"**Scientific Grounding ({ev_source}):** {ev_excerpt}\n\n"
         f"**Identified Risk Factors:** {', '.join(assessment.key_factors) if assessment.key_factors else 'Baseline conditions'}."
     )
 
     # 5. Evidence Validation & Anti-Hallucination Sanitizer
     validator = EvidenceValidator(evidence_chunks)
-    val_report = validator.validate_and_sanitize(draft_narrative, completeness_ratio=1.0)
+    val_report = validator.validate_and_sanitize(draft_narrative, completeness_ratio=1.0, user_telemetry=telemetry.__dict__)
 
-    assistant_reply = val_report["sanitized_text"]
+    confidence_badge = val_report["confidence_badge"]
+    confidence_pct = round(val_report["confidence_score"] * 100)
+    assistant_reply = val_report["sanitized_text"] + f"\n\n**Confidence Level:** {confidence_badge} ({confidence_pct}% evidence-grounded)"
+
     messages.append({"role": "assistant", "content": assistant_reply})
     repo.save_conversation(session_id, updated_profile, messages)
     repo.save_ledger_and_recs(session_id, ranked_recs[:4], val_report["evidence_ledger"])
@@ -258,7 +278,10 @@ def analyze_pure(req: AnalyzeRequest):
         soil_ph=req.soil_ph,
         species_richness=req.species_richness,
         pollution_level=req.pollution_level,
-        deforestation_pressure=req.deforestation_pressure
+        deforestation_pressure=req.deforestation_pressure,
+        region=req.region or "semi_arid",
+        latitude=req.latitude,
+        longitude=req.longitude
     )
     assessment = reasoning_engine.evaluate(telemetry)
     recs = rec_engine.score_and_rank(telemetry, assessment)

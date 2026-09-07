@@ -369,3 +369,26 @@ def test_31_optional_species_richness_and_pollution(reasoning):
     res = reasoning.evaluate(telemetry)
     assert res.stress_levels["biodiversity_stress"] == "HIGH"
     assert any(cf["stressor"] == "DEPLETED_SPECIES_RICHNESS" for cf in res.causal_factors)
+
+# 32. Spatial Context and Bonus Coordinates (Hackathon Page 2 & 3)
+def test_32_spatial_context_and_bonus_coordinates():
+    msg = "My farm is in semi-arid region at lat 31.5, lon -102.3 with wheat monoculture"
+    slots = ConversationManager.extract_slots(msg)
+    assert slots.get("region") == "semi_arid"
+    assert slots.get("latitude") == 31.5
+    assert slots.get("longitude") == -102.3
+    assert slots.get("land_use") == "wheat_monoculture"
+
+# 33. User Baseline Telemetry Ground Truth Preservation
+def test_33_user_telemetry_ground_truth_preservation(repo):
+    chunks = repo.search_chunks("legume intercropping", limit=2)
+    validator = EvidenceValidator(chunks)
+    user_telemetry = {"soc_percent": 0.35, "annual_rainfall_mm": 450.0}
+    
+    draft = "Environmental Assessment: Severe soil carbon depletion (0.35% SOC) collides with hydrological deficit (450.0 mm/yr)."
+    report = validator.validate_and_sanitize(draft, completeness_ratio=1.0, user_telemetry=user_telemetry)
+    
+    # Verify user numbers are retained as ground truth, not converted to [documented positive increase]
+    assert "0.35%" in report["sanitized_text"]
+    assert "450.0 mm" in report["sanitized_text"]
+    assert any(l["action"] == "RETAINED" and "baseline" in l["detail"].lower() for l in report["evidence_ledger"])

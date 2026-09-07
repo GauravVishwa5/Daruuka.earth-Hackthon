@@ -11,12 +11,12 @@
       {
         "test": "Ephemeral Session Auto-generation",
         "passed": true,
-        "details": "Generated: c6549fea-524f-436a-b0a8-ca86b4702c65"
+        "details": "Generated: c96464d0-3fb4-4fc6-ac62-64632b3e9fb6"
       },
       {
         "test": "Distinct Session IDs",
         "passed": true,
-        "details": "S1=c6549fea-524f-436a-b0a8-ca86b4702c65 vs S2=d4c249d6-0bc8-4a1b-8756-0ce8a955e698"
+        "details": "S1=c96464d0-3fb4-4fc6-ac62-64632b3e9fb6 vs S2=9bfb381e-2a83-42ae-9d31-fa5f7e341a95"
       },
       {
         "test": "Session State Isolation",
@@ -154,7 +154,7 @@
       "endpoint": "GET /api/v1/health",
       "auth": "Open / Ephemeral",
       "validation": "Pydantic v2 Strong Typing",
-      "success": "HTTP 200 (4.96ms)",
+      "success": "HTTP 200 (3.78ms)",
       "error": "Method guard HTTP 405",
       "security": "Sanitized",
       "status": "PASS"
@@ -163,7 +163,7 @@
       "endpoint": "GET /api/v1/interventions",
       "auth": "Open / Ephemeral",
       "validation": "Pydantic v2 Strong Typing",
-      "success": "HTTP 200 (30.8ms)",
+      "success": "HTTP 200 (5.77ms)",
       "error": "Method guard HTTP 405",
       "security": "Sanitized",
       "status": "PASS"
@@ -172,7 +172,7 @@
       "endpoint": "GET /api/v1/evidence/{chunk_id}",
       "auth": "Open / Ephemeral",
       "validation": "Pydantic v2 Strong Typing",
-      "success": "HTTP 200 (5.25ms)",
+      "success": "HTTP 200 (5.78ms)",
       "error": "Method guard HTTP 405",
       "security": "Sanitized",
       "status": "PASS"
@@ -181,7 +181,7 @@
       "endpoint": "POST /api/v1/chat",
       "auth": "Open / Ephemeral",
       "validation": "Pydantic v2 Strong Typing",
-      "success": "HTTP 200 (45.56ms)",
+      "success": "HTTP 200 (42.62ms)",
       "error": "Method guard HTTP 405",
       "security": "Sanitized",
       "status": "PASS"
@@ -190,7 +190,7 @@
       "endpoint": "POST /api/v1/analyze",
       "auth": "Open / Ephemeral",
       "validation": "Pydantic v2 Strong Typing",
-      "success": "HTTP 200 (46.25ms)",
+      "success": "HTTP 200 (23.75ms)",
       "error": "Method guard HTTP 405",
       "security": "Sanitized",
       "status": "PASS"
@@ -199,7 +199,7 @@
       "endpoint": "POST /api/v1/environmental-profile",
       "auth": "Open / Ephemeral",
       "validation": "Pydantic v2 Strong Typing",
-      "success": "HTTP 200 (11.47ms)",
+      "success": "HTTP 200 (54.4ms)",
       "error": "Method guard HTTP 405",
       "security": "Sanitized",
       "status": "PASS"
@@ -207,11 +207,11 @@
   ],
   "issues": [],
   "performance": {
-    "GET /api/v1/health": "4.96 ms",
-    "GET /api/v1/interventions": "30.8 ms",
-    "GET /api/v1/evidence/{chunk_id}": "5.25 ms",
-    "POST /api/v1/chat": "45.56 ms",
-    "POST /api/v1/analyze": "46.25 ms",
-    "POST /api/v1/environmental-profile": "11.47 ms"
+    "GET /api/v1/health": "3.78 ms",
+    "GET /api/v1/interventions": "5.77 ms",
+    "GET /api/v1/evidence/{chunk_id}": "5.78 ms",
+    "POST /api/v1/chat": "42.62 ms",
+    "POST /api/v1/analyze": "23.75 ms",
+    "POST /api/v1/environmental-profile": "54.4 ms"
   }
 }

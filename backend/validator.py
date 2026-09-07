@@ -1,5 +1,5 @@
 import re
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 
 class EvidenceValidator:
     def __init__(self, retrieved_chunks: List[Dict[str, Any]]):
@@ -53,7 +53,8 @@ class EvidenceValidator:
     def validate_and_sanitize(
         self, 
         draft_text: str, 
-        completeness_ratio: float = 1.0
+        completeness_ratio: float = 1.0,
+        user_telemetry: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         # Handle zero-evidence state explicitly
         if not self.chunks:
@@ -84,6 +85,14 @@ class EvidenceValidator:
         stripped_count = 0
         sanitized_text = draft_text
 
+        # Build set of valid user baseline telemetry values
+        telemetry_numbers = set()
+        if user_telemetry:
+            for k, v in user_telemetry.items():
+                if v is not None and isinstance(v, (int, float)):
+                    telemetry_numbers.add(str(v).lower())
+                    telemetry_numbers.add(f"{v:g}".lower())
+
         for c in extracted:
             claim_text = c["claim"]
             claim_type = c["type"]
@@ -92,8 +101,22 @@ class EvidenceValidator:
                 clean_token = claim_text.replace("+", "").strip().lower()
                 num_only = re.sub(r'[^\d.]', '', clean_token)
 
-                # Check if exact numeric token appears in retrieved evidence
-                if clean_token in self.corpus_text or (num_only and num_only in self.corpus_text):
+                # Check if number is user's baseline input or verified against literature
+                is_user_baseline = (
+                    num_only in telemetry_numbers or 
+                    any(num_only == re.sub(r'[^\d.]', '', tn) for tn in telemetry_numbers)
+                )
+
+                if is_user_baseline:
+                    supported_count += 1
+                    ledger.append({
+                        "claim": claim_text,
+                        "type": "QUANTITATIVE",
+                        "status": "SUPPORTED",
+                        "action": "RETAINED",
+                        "detail": "User-reported baseline field telemetry."
+                    })
+                elif clean_token in self.corpus_text or (num_only and num_only in self.corpus_text):
                     supported_count += 1
                     ledger.append({
                         "claim": claim_text,

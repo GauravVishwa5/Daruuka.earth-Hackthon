@@ -11,6 +11,9 @@ class EnvironmentalTelemetry:
     species_richness: Optional[str] = None
     pollution_level: Optional[str] = None
     deforestation_pressure: Optional[str] = None
+    region: Optional[str] = "semi_arid"
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 
 @dataclass
 class CausalFactor:

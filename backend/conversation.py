@@ -119,6 +119,32 @@ class ConversationManager:
         if re.search(r'\b(?:deforestation|forest\s+clearing|cleared\s+forest|tree\s+clearing)\b', text_lower):
             extracted["deforestation_pressure"] = "HIGH"
 
+        # 8. Bonus: Spatial Context / Biome / Region
+        if re.search(r'\bsemi-?arid\b', text_lower):
+            extracted["region"] = "semi_arid"
+        elif re.search(r'\barid\b', text_lower):
+            extracted["region"] = "arid"
+        elif re.search(r'\b(?:temperate|continental)\b', text_lower):
+            extracted["region"] = "temperate"
+        elif re.search(r'\b(?:tropical|equatorial)\b', text_lower):
+            extracted["region"] = "tropical"
+        elif re.search(r'\bmediterranean\b', text_lower):
+            extracted["region"] = "mediterranean"
+        elif re.search(r'\b(?:humid|sub-?humid)\b', text_lower):
+            extracted["region"] = "sub_humid"
+
+        # 9. Bonus: Geo-Coordinates (lat, lon)
+        coord_match = re.search(r'(?:lat(?:itude)?[\s:=]+)?(-?\d+\.?\d*)\s*,\s*(?:lon(?:gitude)?[\s:=]+)?(-?\d+\.?\d*)', text, re.IGNORECASE)
+        if coord_match:
+            try:
+                lat = float(coord_match.group(1))
+                lon = float(coord_match.group(2))
+                if -90.0 <= lat <= 90.0 and -180.0 <= lon <= 180.0:
+                    extracted["latitude"] = lat
+                    extracted["longitude"] = lon
+            except ValueError:
+                pass
+
         return extracted
 
     @staticmethod
