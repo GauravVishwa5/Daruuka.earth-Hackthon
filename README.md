@@ -158,11 +158,14 @@ For detailed architectural, mathematical, and implementation specifications, exp
 Execute the automated test suite and AI reasoning benchmarks:
 
 ```bash
-# Run all 31 system, reasoning, RAG, and compliance tests
+# Run all 33 system, reasoning, RAG, and compliance tests
 pytest backend/tests/test_system.py -v
 
 # Run the comprehensive 26-check live audit suite
 python scripts/comprehensive_audit.py
+
+# Clean caches and package a clean shareable distribution zip
+python scripts/prepare_for_sharing.py
 ```
 
 ---

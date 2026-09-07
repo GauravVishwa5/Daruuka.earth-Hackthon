@@ -48,3 +48,8 @@ pgdata/
 darukaa_pgdata/
 *.db
 *.sqlite3
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
