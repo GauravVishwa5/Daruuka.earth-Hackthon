@@ -1,0 +1,252 @@
+[
+  {
+    "chunk_id": "fao_soil_bulletin_80_p42",
+    "source_id": "fao_sb_80",
+    "title": "Soil Management for Sustainable Agriculture",
+    "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+    "authors": [
+      "FAO Land and Water Division"
+    ],
+    "year": 2020,
+    "doi": "10.4060/ca9280en",
+    "url": "https://www.fao.org/documents/card/en/c/ca9280en",
+    "page": 42,
+    "section": "Section 4.2: Legume Intercropping in Water-Limited Zones",
+    "excerpt": "In semi-arid Mediterranean zones, legume intercropping (specifically Cicer arietinum with cereals) has demonstrated an average soil organic carbon increase of 0.12% per year over a 5-year monitoring period, while reducing required synthetic nitrogen inputs by 40 kg N/ha. However, in regions with annual precipitation under 450 mm, competition for early season subsoil moisture can reduce cereal grain filling by 5-8% during severe spring droughts.",
+    "topic": "legume_intercropping",
+    "metrics": [
+      "soc_percent",
+      "water_retention",
+      "nitrogen_fixation"
+    ],
+    "ecosystem": "semi_arid_cropland",
+    "region": "global_drylands",
+    "evidence_type": "institutional_consensus",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "fao_recarbonizing_vol2_p118",
+    "source_id": "fao_recarb_2021",
+    "title": "Recarbonizing Global Soils - Volume 2: Cropland Management Practices",
+    "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+    "authors": [
+      "FAO Global Soil Partnership"
+    ],
+    "year": 2021,
+    "doi": "10.4060/cb6378en",
+    "url": "https://www.fao.org/documents/card/en/c/cb6378en",
+    "page": 118,
+    "section": "Chapter 3: Cover Crops and Soil Aggregation",
+    "excerpt": "Continuous mineral soils with SOC below 0.5% suffer severe aggregate slaking and surface crusting. Cover crops incorporating drought-tolerant Vicia species restore root-derived mycorrhizal glomalin, boosting available water capacity by 15-22% over 3 seasons. In drylands under 500 mm rainfall, mechanical roller-crimper termination at flowering is essential to conserve soil moisture reserves.",
+    "topic": "cover_cropping",
+    "metrics": [
+      "soc_percent",
+      "water_retention",
+      "aggregate_stability"
+    ],
+    "ecosystem": "semi_arid_cropland",
+    "region": "temperate_steppe",
+    "evidence_type": "peer_reviewed_synthesis",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "ipcc_srccl_ch4_p185",
+    "source_id": "ipcc_srccl_2019",
+    "title": "Climate Change and Land: Chapter 4 Land Degradation",
+    "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+    "authors": [
+      "IPCC Working Group"
+    ],
+    "year": 2019,
+    "doi": "10.1017/9781009157988.006",
+    "url": "https://www.ipcc.ch/srccl/chapter/chapter-4/",
+    "page": 185,
+    "section": "Section 4.8: Dryland Salinization and Moisture Vulnerability",
+    "excerpt": "In arid and semi-arid drylands, continuous cereal monoculture without organic return depletes topsoil carbon stocks to less than 0.4%, impairing rainwater infiltration rates by up to 45%. When summer temperatures exceed 32\u00b0C, evaporative demand compounds moisture deficits, precipitating biological soil crust collapse.",
+    "topic": "monoculture_degradation",
+    "metrics": [
+      "soc_percent",
+      "annual_rainfall_mm",
+      "max_temp_celsius"
+    ],
+    "ecosystem": "dryland_agroecosystem",
+    "region": "global_drylands",
+    "evidence_type": "global_assessment",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "ipbes_pollinators_ch2_p74",
+    "source_id": "ipbes_pollinators_2016",
+    "title": "The Assessment Report on Pollinators, Pollination and Food Production",
+    "publisher": "Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services (IPBES)",
+    "authors": [
+      "IPBES Pollinator Group"
+    ],
+    "year": 2016,
+    "doi": "10.5281/zenodo.3402964",
+    "url": "https://www.ipbes.net/assessment-reports/pollinators",
+    "page": 74,
+    "section": "Chapter 2: Landscape Simplification and Wild Bee Declines",
+    "excerpt": "Agricultural intensification and landscape simplification into broadacre monocultures sever seasonal floral nectar continuity. Establishment of native perennial hedgerow buffer strips occupying 3-5% of field perimeters increases wild bee richness by 35% and floral visitation rates by 50% without compromising primary crop acreage.",
+    "topic": "hedgerow_buffer_strips",
+    "metrics": [
+      "floral_nectar_continuity",
+      "pollinator_species",
+      "canopy_cover"
+    ],
+    "ecosystem": "agricultural_cropland",
+    "region": "global_temperate_arid",
+    "evidence_type": "global_assessment",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "fao_conservation_ag_2018_p30",
+    "source_id": "fao_ca_2018",
+    "title": "Conservation Agriculture: Training manual for extension personnel",
+    "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+    "authors": [
+      "FAO Plant Production and Protection"
+    ],
+    "year": 2018,
+    "doi": "10.4060/i8924en",
+    "url": "https://www.fao.org/documents/card/en/c/I8924EN",
+    "page": 30,
+    "section": "Module 3: Minimum Soil Disturbance and Residue Retention",
+    "excerpt": "Zero-tillage combined with 30% permanent soil organic mulch cover reduces evaporative soil water losses by 20-30 mm during summer fallows in semi-arid zones. However, without crop rotation, continuous zero-tillage monoculture can increase herbicide reliance and soil compaction at the 10-15 cm interface.",
+    "topic": "reduced_tillage",
+    "metrics": [
+      "soil_moisture",
+      "soc_percent",
+      "tillage_practice"
+    ],
+    "ecosystem": "semi_arid_steppe",
+    "region": "dryland_cropping",
+    "evidence_type": "technical_guidelines",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "ipcc_wg3_afolu_2022_p79",
+    "source_id": "ipcc_ar6_wg3",
+    "title": "Climate Change 2022: Mitigation of Climate Change (AFOLU)",
+    "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+    "authors": [
+      "IPCC AR6 WGIII Authors"
+    ],
+    "year": 2022,
+    "doi": "10.1017/9781009157926.009",
+    "url": "https://www.ipcc.ch/report/ar6/wg3/",
+    "page": 79,
+    "section": "Section 7.4: Agroforestry and Landscape Carbon Sinks",
+    "excerpt": "Agroforestry windbreaks planted perpendicular to prevailing dry winds reduce field microclimate wind speeds by 25-40%, lowering crop transpiration water loss by 12-18%. In water-stressed environments, species selection must favor deep-rooting native species (e.g. Acacia, Prosopis, or Olive) that do not exploit shallow crop moisture zones.",
+    "topic": "agroforestry_windbreaks",
+    "metrics": [
+      "wind_erosion",
+      "transpiration_loss",
+      "microclimate"
+    ],
+    "ecosystem": "semi_arid_agroforestry",
+    "region": "dryland_savanna_steppe",
+    "evidence_type": "global_assessment",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "fao_swsr_2015_ch5",
+    "source_id": "fao_swsr_2015",
+    "title": "Status of the World Soil Resources: Chapter 5 Acidification and Nutrient Deficits",
+    "publisher": "Food and Agriculture Organization of the United Nations (FAO) and ITPS",
+    "authors": [
+      "Intergovernmental Technical Panel on Soils (ITPS)"
+    ],
+    "year": 2015,
+    "doi": "10.4060/i5199en",
+    "url": "https://www.fao.org/documents/card/en/c/5119be77-8321-4d10-85f7-dd914041b617/",
+    "page": 102,
+    "section": "Chapter 5: Soil Acidification and Nutrient Imbalances",
+    "excerpt": "Soil acidification below pH 5.5 causes aluminum and manganese toxicity in mineral soils and induces severe phosphorus fixation, rendering applied phosphates unavailable to crops. Liming, organic matter incorporation, and acid-tolerant agroforestry species buffer exchangeable acidity and restore cation balance.",
+    "topic": "soil_acidity_management",
+    "metrics": [
+      "soil_ph",
+      "phosphorus_availability",
+      "aluminum_toxicity"
+    ],
+    "ecosystem": "acid_cropland",
+    "region": "global_temperate_and_tropical",
+    "evidence_type": "institutional_consensus",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "ipcc_srccl_ch2_p120",
+    "source_id": "ipcc_srccl_2019",
+    "title": "Climate Change and Land: Chapter 2 Land-Climate Interactions",
+    "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+    "authors": [
+      "IPCC Working Group"
+    ],
+    "year": 2019,
+    "doi": "10.1017/9781009157988.004",
+    "url": "https://www.ipcc.ch/srccl/chapter/chapter-2/",
+    "page": 120,
+    "section": "Section 2.5: Thermal Extremes and Organic Carbon Dynamics",
+    "excerpt": "Sustained canopy and surface soil temperatures exceeding 34\u00b0C significantly accelerate microbial heterotrophic respiration, doubling the rate of soil organic carbon oxidation in unprotected bare soils compared to vegetated cover. In semi-arid croplands, high evaporative demand suppresses biological nitrogen fixation.",
+    "topic": "thermal_stress_carbon_dynamics",
+    "metrics": [
+      "max_temp_celsius",
+      "soc_percent",
+      "evaporative_demand"
+    ],
+    "ecosystem": "dryland_cropland",
+    "region": "global_drylands",
+    "evidence_type": "global_assessment",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "ipbes_global_ch2_p140",
+    "source_id": "ipbes_global_2019",
+    "title": "Global Assessment Report on Biodiversity and Ecosystem Services: Chapter 2.2",
+    "publisher": "Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services (IPBES)",
+    "authors": [
+      "IPBES Secretariat"
+    ],
+    "year": 2019,
+    "doi": "10.5281/zenodo.3831884",
+    "url": "https://www.ipbes.net/global-assessment",
+    "page": 140,
+    "section": "Chapter 2.2: Drivers of Arthropod Decline in Intensive Agriculture",
+    "excerpt": "Heavy reliance on synthetic pesticide regimens and agrochemical runoff in simplified agricultural landscapes is linked to a 40% reduction in local insect pollinator and predatory arthropod species richness. Establishing non-crop floral refugia and reducing pesticide load restores beneficial natural enemy populations within 2 growing seasons.",
+    "topic": "chemical_pollution_biodiversity",
+    "metrics": [
+      "species_richness",
+      "pollinator_support",
+      "pesticide_reduction"
+    ],
+    "ecosystem": "intensive_cropland",
+    "region": "global",
+    "evidence_type": "intergovernmental_assessment",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  },
+  {
+    "chunk_id": "ipbes_global_ch2_p185",
+    "source_id": "ipbes_global_2019",
+    "title": "Global Assessment Report on Biodiversity and Ecosystem Services: Chapter 2.3",
+    "publisher": "Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services (IPBES)",
+    "authors": [
+      "IPBES Secretariat"
+    ],
+    "year": 2019,
+    "doi": "10.5281/zenodo.3831884",
+    "url": "https://www.ipbes.net/global-assessment",
+    "page": 185,
+    "section": "Chapter 2.3: Habitat Fragmentation and Structural Connectivity",
+    "excerpt": "Agricultural clearing and deforestation isolate native floral and faunal gene pools, accelerating landscape-scale ecological vulnerability to climatic shocks. Connecting fragmented forest patches via agroforestry corridors and perennial windbreak networks increases functional bird and bat dispersal corridors by over 65%.",
+    "topic": "deforestation_habitat_connectivity",
+    "metrics": [
+      "habitat_pressure",
+      "corridor_connectivity",
+      "biodiversity_gain"
+    ],
+    "ecosystem": "fragmented_forest_cropland_mosaic",
+    "region": "global_temperate_and_tropical",
+    "evidence_type": "intergovernmental_assessment",
+    "evidence_strength": "TIER_1_CONSENSUS"
+  }
+]

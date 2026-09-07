@@ -1,0 +1,217 @@
+{
+  "phases": {
+    "PHASE_2": [
+      {
+        "test": "Health Endpoint Check",
+        "passed": true,
+        "details": "Status: healthy, DB: connected, pgvector: 0.8.6"
+      }
+    ],
+    "PHASE_3": [
+      {
+        "test": "Ephemeral Session Auto-generation",
+        "passed": true,
+        "details": "Generated: c6549fea-524f-436a-b0a8-ca86b4702c65"
+      },
+      {
+        "test": "Distinct Session IDs",
+        "passed": true,
+        "details": "S1=c6549fea-524f-436a-b0a8-ca86b4702c65 vs S2=d4c249d6-0bc8-4a1b-8756-0ce8a955e698"
+      },
+      {
+        "test": "Session State Isolation",
+        "passed": true,
+        "details": "S1 retained SOC=0.4"
+      },
+      {
+        "test": "Session Traversal & Injection Immunity",
+        "passed": true,
+        "details": "All malformed session IDs handled gracefully without 500 crashes"
+      }
+    ],
+    "PHASE_4": [
+      {
+        "test": "API GET /api/v1/health",
+        "passed": true,
+        "details": "Success=True, Validation=True, MethodGuard=True"
+      },
+      {
+        "test": "API GET /api/v1/interventions",
+        "passed": true,
+        "details": "Success=True, Validation=True, MethodGuard=True"
+      },
+      {
+        "test": "API GET /api/v1/evidence/{chunk_id}",
+        "passed": true,
+        "details": "Success=True, Validation=True, MethodGuard=True"
+      },
+      {
+        "test": "API POST /api/v1/chat",
+        "passed": true,
+        "details": "Success=True, Validation=True, MethodGuard=True"
+      },
+      {
+        "test": "API POST /api/v1/analyze",
+        "passed": true,
+        "details": "Success=True, Validation=True, MethodGuard=True"
+      },
+      {
+        "test": "API POST /api/v1/environmental-profile",
+        "passed": true,
+        "details": "Success=True, Validation=True, MethodGuard=True"
+      }
+    ],
+    "PHASE_5": [
+      {
+        "test": "pgvector Extension Active",
+        "passed": true,
+        "details": "Version: 0.8.6"
+      },
+      {
+        "test": "HNSW Vector Index Exists",
+        "passed": true,
+        "details": "Index: idx_evidence_chunks_hnsw"
+      },
+      {
+        "test": "Knowledge Base Row Counts",
+        "passed": true,
+        "details": "Chunks=10, Sources=8, Interventions=8"
+      },
+      {
+        "test": "Cascade Deletion Integrity",
+        "passed": true,
+        "details": "Messages cascade deleted with conversation"
+      }
+    ],
+    "PHASE_7": [
+      {
+        "test": "RAG Vector Retrieval with DOIs",
+        "passed": true,
+        "details": "Retrieved 3 chunks, DOIs: ['10.4060/i8924en', '10.1017/9781009157988.006', '10.4060/i5199en']"
+      }
+    ],
+    "PHASE_6": [
+      {
+        "test": "Fabricated Numeric Claim Stripping",
+        "passed": true,
+        "details": "Stripped 2 numbers. Sanitized text: Adopting intervention X will boost yield by [documented positive increase] and s..."
+      }
+    ],
+    "PHASE_8": [
+      {
+        "test": "Workflow Turn 1: Clarification Request",
+        "passed": true,
+        "details": "Status=CLARIFICATION_REQUIRED, Missing=['soc_percent', 'annual_rainfall_mm', 'land_use']"
+      },
+      {
+        "test": "Workflow Turn 2: Slot Retention",
+        "passed": true,
+        "details": "Retained SOC, still missing: ['annual_rainfall_mm', 'land_use']"
+      },
+      {
+        "test": "Workflow Turn 3: Compound Stress & Recommendations",
+        "passed": true,
+        "details": "Compound Risk: CRITICAL_COMPOUND_DEGRADATION, Recs: 4"
+      }
+    ],
+    "PHASE_10": [
+      {
+        "test": "Payload Overflow Protection",
+        "passed": true,
+        "details": "HTTP 422"
+      },
+      {
+        "test": "Out-of-Bounds Range Validation",
+        "passed": true,
+        "details": "HTTP 422"
+      },
+      {
+        "test": "Non-Existent Chunk 404",
+        "passed": true,
+        "details": "HTTP 404"
+      },
+      {
+        "test": "Whitespace Chat Handling",
+        "passed": true,
+        "details": "Handled with: INVALID_INPUT"
+      }
+    ],
+    "PHASE_11": [
+      {
+        "test": "CORS Preflight Headers",
+        "passed": true,
+        "details": "HTTP 200"
+      },
+      {
+        "test": "XSS Injection Resistance",
+        "passed": true,
+        "details": "XSS tags not reflected in raw executable context"
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "endpoint": "GET /api/v1/health",
+      "auth": "Open / Ephemeral",
+      "validation": "Pydantic v2 Strong Typing",
+      "success": "HTTP 200 (4.96ms)",
+      "error": "Method guard HTTP 405",
+      "security": "Sanitized",
+      "status": "PASS"
+    },
+    {
+      "endpoint": "GET /api/v1/interventions",
+      "auth": "Open / Ephemeral",
+      "validation": "Pydantic v2 Strong Typing",
+      "success": "HTTP 200 (30.8ms)",
+      "error": "Method guard HTTP 405",
+      "security": "Sanitized",
+      "status": "PASS"
+    },
+    {
+      "endpoint": "GET /api/v1/evidence/{chunk_id}",
+      "auth": "Open / Ephemeral",
+      "validation": "Pydantic v2 Strong Typing",
+      "success": "HTTP 200 (5.25ms)",
+      "error": "Method guard HTTP 405",
+      "security": "Sanitized",
+      "status": "PASS"
+    },
+    {
+      "endpoint": "POST /api/v1/chat",
+      "auth": "Open / Ephemeral",
+      "validation": "Pydantic v2 Strong Typing",
+      "success": "HTTP 200 (45.56ms)",
+      "error": "Method guard HTTP 405",
+      "security": "Sanitized",
+      "status": "PASS"
+    },
+    {
+      "endpoint": "POST /api/v1/analyze",
+      "auth": "Open / Ephemeral",
+      "validation": "Pydantic v2 Strong Typing",
+      "success": "HTTP 200 (46.25ms)",
+      "error": "Method guard HTTP 405",
+      "security": "Sanitized",
+      "status": "PASS"
+    },
+    {
+      "endpoint": "POST /api/v1/environmental-profile",
+      "auth": "Open / Ephemeral",
+      "validation": "Pydantic v2 Strong Typing",
+      "success": "HTTP 200 (11.47ms)",
+      "error": "Method guard HTTP 405",
+      "security": "Sanitized",
+      "status": "PASS"
+    }
+  ],
+  "issues": [],
+  "performance": {
+    "GET /api/v1/health": "4.96 ms",
+    "GET /api/v1/interventions": "30.8 ms",
+    "GET /api/v1/evidence/{chunk_id}": "5.25 ms",
+    "POST /api/v1/chat": "45.56 ms",
+    "POST /api/v1/analyze": "46.25 ms",
+    "POST /api/v1/environmental-profile": "11.47 ms"
+  }
+}

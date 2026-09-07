@@ -1,0 +1,264 @@
+[
+  {
+    "slug": "legume_intercropping",
+    "name": "Legume Intercropping (Chickpea / Field Pea)",
+    "category": "soil_and_crop_diversification",
+    "biome_applicability": [
+      "semi_arid",
+      "mediterranean",
+      "temperate_steppe"
+    ],
+    "water_requirement": "LOW",
+    "primary_benefits": {
+      "soc_annual_increase_pct": 0.12,
+      "nitrogen_fixation_kg_ha": 40,
+      "pollinator_support": "MODERATE"
+    },
+    "tradeoffs": [
+      {
+        "risk": "Subsoil moisture competition during drought",
+        "severity": "MODERATE",
+        "mitigation": "Sow in alternate 2-row strips with 40 cm spacing; terminate or harvest early."
+      }
+    ],
+    "base_feasibility": 0.85,
+    "biodiversity_gain": 0.75,
+    "soil_gain": 0.85,
+    "citation_keys": [
+      "fao_soil_bulletin_80_p42"
+    ],
+    "time_horizon": {
+      "category": "short",
+      "seasons": 1,
+      "note": "Visible yield diversification and initial biological nitrogen fixation achieved in single crop cycle (3-4 months)."
+    }
+  },
+  {
+    "slug": "native_hedgerow_buffers",
+    "name": "Native Biodiversity Hedgerow Buffers",
+    "category": "habitat_enhancement",
+    "biome_applicability": [
+      "semi_arid",
+      "temperate_grassland",
+      "mediterranean"
+    ],
+    "water_requirement": "LOW",
+    "primary_benefits": {
+      "wild_bee_richness_increase_pct": 35,
+      "wind_erosion_reduction_pct": 25,
+      "floral_visitation_boost_pct": 50
+    },
+    "tradeoffs": [
+      {
+        "risk": "Land taken out of field cultivation",
+        "severity": "LOW",
+        "mitigation": "Confine to 3-5% perimeter boundaries and fence lines."
+      }
+    ],
+    "base_feasibility": 0.8,
+    "biodiversity_gain": 0.95,
+    "soil_gain": 0.4,
+    "citation_keys": [
+      "ipbes_pollinators_ch2_p74"
+    ],
+    "time_horizon": {
+      "category": "medium",
+      "seasons": 3,
+      "note": "Perennial woody and herbaceous shrubs require 2-3 growing seasons to establish continuous floral foraging corridors."
+    }
+  },
+  {
+    "slug": "drought_cover_cropping",
+    "name": "Drought-Resilient Cover Cropping (Vicia / Rye)",
+    "category": "soil_enhancement",
+    "biome_applicability": [
+      "semi_arid",
+      "temperate_steppe"
+    ],
+    "water_requirement": "MEDIUM",
+    "primary_benefits": {
+      "available_water_capacity_boost_pct": 18,
+      "aggregate_stability": "HIGH",
+      "surface_crusting_reduction": "HIGH"
+    },
+    "tradeoffs": [
+      {
+        "risk": "Moisture depletion if allowed to mature into summer",
+        "severity": "HIGH",
+        "mitigation": "Mandatory mechanical roller-crimper or chemical termination at flowering stage."
+      }
+    ],
+    "base_feasibility": 0.7,
+    "biodiversity_gain": 0.65,
+    "soil_gain": 0.9,
+    "citation_keys": [
+      "fao_recarbonizing_vol2_p118"
+    ],
+    "time_horizon": {
+      "category": "short",
+      "seasons": 1,
+      "note": "Surface soil armor and biological residue mulch established across a single fallow or winter cover season."
+    }
+  },
+  {
+    "slug": "agroforestry_windbreaks",
+    "name": "Agroforestry Windbreak Strips (Native Perennials)",
+    "category": "agroforestry",
+    "biome_applicability": [
+      "semi_arid",
+      "dryland_savanna_steppe"
+    ],
+    "water_requirement": "LOW_TO_MEDIUM",
+    "primary_benefits": {
+      "wind_speed_reduction_pct": 30,
+      "crop_transpiration_loss_reduction_pct": 15,
+      "carbon_sequestration": "HIGH"
+    },
+    "tradeoffs": [
+      {
+        "risk": "Establishment phase seedling care and tree spacing",
+        "severity": "MODERATE",
+        "mitigation": "Select deep-rooting native species; install protective tree shelters."
+      }
+    ],
+    "base_feasibility": 0.65,
+    "biodiversity_gain": 0.85,
+    "soil_gain": 0.7,
+    "citation_keys": [
+      "ipcc_wg3_afolu_2022_p79"
+    ],
+    "time_horizon": {
+      "category": "long",
+      "seasons": 6,
+      "note": "Deep-rooted windbreak tree canopy takes 3-5 years (6+ seasons) to attain effective shelterbelt height."
+    }
+  },
+  {
+    "slug": "conservation_zero_tillage",
+    "name": "Conservation Tillage & Mulch Retention",
+    "category": "soil_and_water_conservation",
+    "biome_applicability": [
+      "semi_arid",
+      "temperate_steppe"
+    ],
+    "water_requirement": "NONE",
+    "primary_benefits": {
+      "evaporative_water_saving_mm": 25,
+      "erosion_control": "VERY_HIGH"
+    },
+    "tradeoffs": [
+      {
+        "risk": "Subsurface compaction if practiced without diverse root systems",
+        "severity": "MODERATE",
+        "mitigation": "Combine with deep taproot rotations (e.g., radish, chickpea)."
+      }
+    ],
+    "base_feasibility": 0.85,
+    "biodiversity_gain": 0.5,
+    "soil_gain": 0.8,
+    "citation_keys": [
+      "fao_conservation_ag_2018_p30"
+    ],
+    "time_horizon": {
+      "category": "medium",
+      "seasons": 2,
+      "note": "Soil macro-aggregate stabilization and continuous earthworm biopore networks develop over 2-4 consecutive seasons."
+    }
+  },
+  {
+    "slug": "high_water_clover_cover",
+    "name": "High-Biomass Red Clover Cover Crop",
+    "category": "soil_enhancement",
+    "biome_applicability": [
+      "temperate_humid",
+      "subtropical"
+    ],
+    "water_requirement": "HIGH",
+    "primary_benefits": {
+      "nitrogen_fixation_kg_ha": 90,
+      "biomass_production_tonnes_ha": 4.5
+    },
+    "tradeoffs": [
+      {
+        "risk": "Severe subsoil moisture exhaustion in arid and semi-arid zones",
+        "severity": "CRITICAL",
+        "mitigation": "Forbidden in zones with annual rainfall < 600 mm unless irrigated."
+      }
+    ],
+    "base_feasibility": 0.75,
+    "biodiversity_gain": 0.7,
+    "soil_gain": 0.85,
+    "citation_keys": [],
+    "time_horizon": {
+      "category": "short",
+      "seasons": 1,
+      "note": "Rapid winter annual biomass accumulation completed in 1 season under adequate moisture."
+    }
+  },
+  {
+    "slug": "biochar_compost_conditioning",
+    "name": "Biochar & Organic Compost Conditioning",
+    "category": "soil_enhancement",
+    "biome_applicability": [
+      "all_biomes",
+      "semi_arid",
+      "arid"
+    ],
+    "water_requirement": "NONE",
+    "primary_benefits": {
+      "cation_exchange_boost": "HIGH",
+      "water_holding_capacity_boost_pct": 20,
+      "recalcitrant_carbon_storage": "VERY_HIGH"
+    },
+    "tradeoffs": [
+      {
+        "risk": "Upfront material procurement and application cost",
+        "severity": "HIGH",
+        "mitigation": "Target spot application or banding in seed furrows."
+      }
+    ],
+    "base_feasibility": 0.55,
+    "biodiversity_gain": 0.6,
+    "soil_gain": 0.95,
+    "citation_keys": [
+      "fao_recarbonizing_vol2_p118"
+    ],
+    "time_horizon": {
+      "category": "medium",
+      "seasons": 2,
+      "note": "Immediate cation retention enhancement; stable microbial colonisation and carbon recalcitrance peak in year 2."
+    }
+  },
+  {
+    "slug": "swale_contour_water_buffering",
+    "name": "Contour Swales & Infiltration Buffers",
+    "category": "hydrological_restoration",
+    "biome_applicability": [
+      "semi_arid",
+      "dryland_hills"
+    ],
+    "water_requirement": "NONE",
+    "primary_benefits": {
+      "runoff_capture_pct": 60,
+      "groundwater_recharge": "HIGH"
+    },
+    "tradeoffs": [
+      {
+        "risk": "Earthworks labor and landscape reshaping",
+        "severity": "HIGH",
+        "mitigation": "Construct along natural contour lines using farm tractor blades."
+      }
+    ],
+    "base_feasibility": 0.5,
+    "biodiversity_gain": 0.75,
+    "soil_gain": 0.7,
+    "citation_keys": [
+      "ipcc_srccl_ch4_p185"
+    ],
+    "time_horizon": {
+      "category": "long",
+      "seasons": 4,
+      "note": "Earthworks stabilize in season 1; subsoil infiltration lens and hydration mound mature over 2-3 years."
+    }
+  }
+]
