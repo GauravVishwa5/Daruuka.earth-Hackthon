@@ -21,7 +21,7 @@ try:
     from backend.recommendation import RecommendationEngine
     from backend.rag import RAGService
     from backend.validator import EvidenceValidator
-    from backend.conversation import ConversationManager
+    from backend.conversation import ConversationManager, REQUIRED_SLOTS
 except ImportError:
     from config import settings
     from repository import get_repository
@@ -29,7 +29,7 @@ except ImportError:
     from recommendation import RecommendationEngine
     from rag import RAGService
     from validator import EvidenceValidator
-    from conversation import ConversationManager
+    from conversation import ConversationManager, REQUIRED_SLOTS
 
 try:
     from backend.db.database import check_db_connection
@@ -130,6 +130,7 @@ def handle_chat(req: ChatRequest):
     # Evaluate turn for slot-filling
     turn_eval = ConversationManager.evaluate_turn(req.message, current_profile)
     updated_profile = turn_eval["profile"]
+    new_slots = turn_eval.get("new_slots", {})
     
     messages.append({"role": "user", "content": req.message})
 
@@ -195,7 +196,21 @@ def handle_chat(req: ChatRequest):
             for k, v in top_rec["primary_benefits"].items()
         ])
 
+    continuation_notice = ""
+    if not new_slots and all(k in updated_profile for k in REQUIRED_SLOTS):
+        continuation_notice = (
+            f"*(Evaluating symptoms against active field baseline: SOC {telemetry.soc_percent}%, "
+            f"Rainfall {telemetry.annual_rainfall_mm} mm, Land use: {telemetry.land_use.replace('_', ' ')}. "
+            f"To diagnose a new field, click 'New Session'.)*\n\n"
+        )
+
+    validation_warning = ""
+    if updated_profile.get("telemetry_warning"):
+        validation_warning = f"⚠️ **Agronomic Validation Alert:** {updated_profile['telemetry_warning']}\n\n"
+
     draft_narrative = (
+        f"{continuation_notice}"
+        f"{validation_warning}"
         f"**Environmental Assessment:** {assessment.summary_text}\n\n"
         f"**Top Recommendation:** {rec_name} (Decision Score: {top_rec['decision_score'] if top_rec else 'N/A'})\n\n"
         f"**Impacted Metrics:** {benefits_str}\n\n"

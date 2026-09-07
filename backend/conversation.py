@@ -19,6 +19,9 @@ class ConversationManager:
                 val = float(soc_match.group(1))
                 if 0.0 <= val <= 20.0:
                     extracted["soc_percent"] = val
+                else:
+                    extracted["soc_percent"] = min(20.0, max(0.0, val))
+                    extracted["telemetry_warning"] = f"Reported SOC of {val}% exceeds physical limits for agricultural soils (0.1%–20.0%). Clamped to 20.0% (organic peat threshold)."
             except ValueError:
                 pass
 
@@ -182,11 +185,13 @@ class ConversationManager:
                 "status": "CLARIFICATION_REQUIRED",
                 "clarification_prompt": prompt,
                 "missing_fields": missing,
-                "profile": accumulated_profile
+                "profile": accumulated_profile,
+                "new_slots": new_slots
             }
 
         # Profile is complete
         return {
             "status": "READY_FOR_REASONING",
-            "profile": accumulated_profile
+            "profile": accumulated_profile,
+            "new_slots": new_slots
         }

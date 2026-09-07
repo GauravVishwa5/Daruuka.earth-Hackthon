@@ -14,13 +14,29 @@ class RecommendationEngine:
         interventions = self.repo.get_all_interventions()
         scored_recs = []
 
+        # Determine actual biophysical biome from precipitation
+        rainfall = telemetry.annual_rainfall_mm or 500.0
+        if rainfall < 500:
+            target_biome = "semi_arid"
+        elif rainfall >= 700:
+            target_biome = "temperate_humid"
+        else:
+            target_biome = "temperate_steppe"
+
         for item in interventions:
-            # 1. Environmental Fit (F)
-            fit = 0.85
-            if "semi_arid" in item.get("biome_applicability", []):
+            biomes = item.get("biome_applicability", [])
+
+            # 1. Environmental Fit (F) based on actual precipitation & biome
+            if target_biome in biomes:
                 fit = 0.95
-            elif "all_biomes" in item.get("biome_applicability", []):
-                fit = 0.80
+            elif "all_biomes" in biomes:
+                fit = 0.88
+            elif "semi_arid" in biomes and target_biome == "temperate_steppe":
+                fit = 0.82
+            elif target_biome == "temperate_humid" and "semi_arid" in biomes:
+                fit = 0.65  # Suboptimal: drought-focused interventions in high-moisture zones
+            else:
+                fit = 0.55
 
             # 2. Evidence Strength (E)
             evidence_chunks = []
@@ -31,13 +47,30 @@ class RecommendationEngine:
             
             e_score = 0.90 if evidence_chunks else 0.50
 
-            # 3. Biodiversity Gain (B) & Soil Gain (S) & Feasibility (M)
+            # 3. Biodiversity Gain (B), Soil Gain (S), Feasibility (M)
             b_score = item.get("biodiversity_gain", 0.60)
             s_score = item.get("soil_gain", 0.60)
             m_score = item.get("base_feasibility", 0.70)
 
+            # --- Dynamically adjust for diagnosed stress constraints ---
+            # Critical SOC crisis: prioritize high soil carbon builders (Biochar, Conservation Tillage)
+            if assessment.soil_stress == "CRITICAL" and s_score >= 0.80:
+                s_score = min(1.0, s_score + 0.10)
+
+            # Acid stress (pH < 5.5): Biochar / compost offers vital CEC and Al neutralization (FAO SWSR 2015)
+            if telemetry.soil_ph and telemetry.soil_ph < 5.5 and item.get("category") == "soil_enhancement":
+                s_score = min(1.0, s_score + 0.08)
+
+            # Thermal stress (>= 35C): Canopy & soil armor shield evaporative loss
+            if telemetry.max_temp_celsius and telemetry.max_temp_celsius >= 35.0:
+                if item.get("category") in ("soil_and_water_conservation", "agroforestry"):
+                    fit = min(1.0, fit + 0.05)
+
+            # Existing agroforestry: farm already has tree canopy; prioritize perimeter habitat or soil care
+            if "agroforestry" in telemetry.land_use.lower() and item.get("category") == "agroforestry":
+                fit = max(0.65, fit - 0.15)
+
             # 4. Resource Risk Penalty (R)
-            # Water stress context penalty
             water_req = item.get("water_requirement", "LOW")
             if assessment.water_penalty_active and water_req == "HIGH":
                 risk_penalty = 0.90  # Severe penalty for water-guzzling crops in drought zones
