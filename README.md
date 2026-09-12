@@ -93,7 +93,7 @@ flowchart TD
 ### Launch Steps
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-org/darukaa-earth.git
+git clone https://github.com/GauravVishwa5/Daruuka.earth-Hackthon.git
 cd darukaa-earth
 
 # 2. Configure environment variables
